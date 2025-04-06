@@ -1,0 +1,24 @@
+.Select {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  
+  &__options {
+    width: 100%;
+    height: 52px;
+  
+    font-weight: 500;
+    font-size: 20px;
+  
+    border-radius: 2px;
+    padding: 12px;
+    border: 1px solid #cccccc;
+  }
+}
+
+
