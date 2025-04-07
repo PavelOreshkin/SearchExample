@@ -1,6 +1,6 @@
-import { Route, Routes } from "react-router-dom";
-import { Search } from "@/pages/search";
-import { RootLayout } from "@/shared/ui/RootLayout";
+import { Route, Routes } from 'react-router-dom';
+import { Search } from '@/pages/search';
+import { RootLayout } from '@/shared/ui/RootLayout';
 
 function App() {
   return (
