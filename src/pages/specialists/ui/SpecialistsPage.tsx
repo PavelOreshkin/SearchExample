@@ -44,7 +44,7 @@ export const SpecialistsPage = memo(() => {
   return (
     <div className="flex grow flex-col">
       <FiltersPanel />
-      <div className="my-6 w-full border-b border-b-gray-light" />
+      <div className="my-6 w-full border-b border-b-gray-light max-sm:hidden" />
       <div className="grow">
         <div className="grid grid-cols-2 gap-x-5 gap-y-10 max-sm:gap-y-5 lg:grid-cols-3">
           {CARD_MOCK.map((card, index) => (
@@ -61,7 +61,7 @@ export const SpecialistsPage = memo(() => {
           ))}
         </div>
       </div>
-      <div className="mt-10 w-[312px] self-center">
+      <div className="mt-10 w-full max-w-[312px] self-center">
         <Button>Показать ещё</Button>
       </div>
     </div>

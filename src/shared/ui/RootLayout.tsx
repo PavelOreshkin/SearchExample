@@ -7,7 +7,7 @@ type Props = {
 export const RootLayout: React.FC<Props> = memo(({ children }) => {
   return (
     <div className="flex min-h-screen justify-center">
-      <div className="flex w-full max-w-[1184px] border-2 px-11 pb-20 pt-13">
+      <div className="flex w-full min-w-[320px] max-w-[1184px] border-2 px-11 pb-20 pt-13 max-sm:px-4 max-sm:pt-4">
         {children}
       </div>
     </div>

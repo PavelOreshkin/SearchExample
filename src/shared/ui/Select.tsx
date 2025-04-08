@@ -1,29 +1,34 @@
 import { memo, useState } from 'react';
+import dropdownIcon from '../assets/dropdown.svg';
 
-type Props = {
+export type SelectProps = {
   title: string;
   options: {
     label: string;
     value: string | number;
   }[];
   query: string;
-  initialValue: any;
-  onChange: (arg: any) => void;
+  onChange: (arg: Record<string, string | undefined>) => void;
+  initialValue?: SelectProps['options'][0]['value'];
   placeholder?: string;
   isRangeCalculation?: boolean;
+  isSpecialTitleSize?: boolean;
 };
 
-const Select: React.FC<Props> = ({
+const Select: React.FC<SelectProps> = ({
   title,
   options,
   query,
-  initialValue,
+  initialValue = '',
   onChange,
   placeholder,
   isRangeCalculation,
+  isSpecialTitleSize,
 }) => {
+  // const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(initialValue);
-  const handleChange = (event: any) => {
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
     setSelected(value);
     if (isRangeCalculation) {
@@ -33,25 +38,41 @@ const Select: React.FC<Props> = ({
     }
     onChange({ [query]: value });
   };
+
   return (
-    <div className="flex flex-col gap-3 text-2xl max-sm:gap-2 max-sm:text-[14px]">
-      <label htmlFor={title} className="ml-2 font-bold max-sm:ml-1">
+    <div className="flex flex-col gap-3 max-sm:gap-2">
+      <label
+        htmlFor={title}
+        className={`ml-2 text-${
+          isSpecialTitleSize ? '2xl' : 'xl'
+        } font-bold max-sm:ml-1 max-sm:text-base`}
+      >
         {title}
       </label>
-      <select
-        value={selected}
-        name={title}
-        id={title}
-        onChange={handleChange}
-        className="border-gr h-13 rounded-sm border border-gray-light pl-3 max-sm:h-10"
-      >
-        <option value="">{placeholder}</option>
-        {options.map(({ value, label }) => (
-          <option key={value} value={value}>
-            {label}
-          </option>
-        ))}
-      </select>
+      <div className="relative rounded-sm border border-gray-light">
+        <select
+          value={selected}
+          name={title}
+          id={title}
+          onChange={handleChange}
+          // onMouseDown={() => setIsOpen(true)}
+          // onBlur={() => setIsOpen(false)}
+          className="border-gr relative h-13 w-full cursor-pointer appearance-none pl-3 text-2xl max-sm:h-10 max-sm:pl-1 max-sm:text-base"
+        >
+          <option value="">{placeholder}</option>
+          {options.map(({ value, label }) => (
+            <option key={value} value={value}>
+              {label}
+            </option>
+          ))}
+        </select>
+        <img
+          src={dropdownIcon}
+          alt="dropdown arrow"
+          className="pointer-events-none absolute right-3 top-[50%] h-4 w-4 translate-y-[-50%] max-sm:right-2 max-sm:h-3 max-sm:w-3"
+          // isOpen ? 'rotate-180' : ''
+        />
+      </div>
     </div>
   );
 };

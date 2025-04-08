@@ -1,4 +1,4 @@
-export interface Filters {
+interface Filters {
   sex: 1 | 2;
   ageFrom: number;
   ageTo: number;

@@ -1,21 +1,23 @@
-import { memo, useEffect, useMemo } from 'react';
+import { memo, useMemo } from 'react';
+import type { SelectProps } from '@/shared/ui/Select';
 import Select from '@/shared/ui/Select';
 import Button from '@/shared/ui/Button';
+import type { RangeProps } from '@/shared/ui/Range';
 import Range from '@/shared/ui/Range';
 import { useAppSelector } from '@/shared/lib/hooks.ts';
 import { selectSubjectOptions } from '@/entities/subjects';
 import { useQueryFilters } from '../lib/useQueryFilters';
+import type { QueryFilterType } from '../lib/useQueryFilters';
 
-type Filter = {
-  type: 'Select' | 'Range';
-  title: string;
-  query: string;
-  options: { label: string; value: string | number }[];
-  initialValue?: any;
-  initialValueFrom?: any;
-  initialValueTo?: any;
-  placeholder?: string;
+type SelectFilter = Omit<SelectProps, 'onChange'> & {
+  type: 'Select';
 };
+
+type RangeFilter = Omit<RangeProps, 'onChange'> & {
+  type: 'Range';
+};
+
+type Filter = SelectFilter | RangeFilter;
 
 const ageRange = Array.from({ length: 99 - 18 + 1 }, (_, i) => ({
   label: String(i + 18),
@@ -45,6 +47,7 @@ export const FiltersPanel = memo(() => {
           { label: 'мужчина', value: 1 },
           { label: 'женщина', value: 2 },
         ],
+        isSpecialTitleSize: true,
       },
       {
         type: 'Range',
@@ -97,12 +100,12 @@ export const FiltersPanel = memo(() => {
     [subjectOptions],
   );
 
-  const handleChangeFilter = (filters: any) => {
+  const handleChangeFilter = (filters: QueryFilterType) => {
     setQueryFilter(filters);
   };
 
   return (
-    <div className="grid grid-cols-1 gap-x-20 gap-y-9 max-sm:gap-y-5 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-x-20 gap-y-9 rounded-sm max-sm:gap-y-5 max-sm:border max-sm:border-gray-light max-sm:p-2 md:grid-cols-2 lg:grid-cols-3">
       {filters.map((filter) => (
         <div key={filter.title}>
           {filter.type === 'Select' ? (
@@ -114,7 +117,7 @@ export const FiltersPanel = memo(() => {
         </div>
       ))}
       <div className="flex items-end">
-        <Button>Показать анкеты</Button>
+        <Button onClick={() => {}}>Показать анкеты</Button>
       </div>
     </div>
   );
