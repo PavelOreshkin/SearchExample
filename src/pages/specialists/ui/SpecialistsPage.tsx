@@ -46,7 +46,7 @@ export const SpecialistsPage = memo(() => {
       <FiltersPanel />
       <div className="my-6 w-full border-b border-b-gray-light max-sm:hidden" />
       <div className="grow">
-        <div className="grid grid-cols-2 gap-x-5 gap-y-10 max-sm:gap-y-5 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-x-5 gap-y-10 max-sm:mt-2 max-sm:gap-x-2 max-sm:gap-y-4 lg:grid-cols-3">
           {CARD_MOCK.map((card, index) => (
             <SpecialistCard
               key={index}
