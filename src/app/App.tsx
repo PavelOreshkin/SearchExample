@@ -1,12 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
-import { Search } from '@/pages/search';
+import { SpecialistsPage } from '@/pages/specialists';
 import { RootLayout } from '@/shared/ui/RootLayout';
 
 function App() {
   return (
     <RootLayout>
       <Routes>
-        <Route path="/" element={<Search />} />
+        <Route path="/" element={<SpecialistsPage />} />
       </Routes>
     </RootLayout>
   );

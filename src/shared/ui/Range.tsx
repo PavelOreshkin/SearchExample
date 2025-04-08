@@ -1,18 +1,50 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 
 type Props = {
   title: string;
-  fromOptions: {
+  options: {
     label: string;
-    value: string;
+    value: string | number;
   }[];
-  toOptions: {
-    label: string;
-    value: string;
-  }[];
+  query: string;
+  initialValueFrom: any;
+  initialValueTo: any;
+  onChange: (arg: any) => void;
 };
 
-const Range: React.FC<Props> = ({ title, fromOptions, toOptions }) => {
+const Range: React.FC<Props> = ({
+  title,
+  options,
+  query,
+  initialValueFrom,
+  initialValueTo,
+  onChange,
+}) => {
+  const [selectedFrom, setSelectedFrom] = useState(initialValueFrom);
+  const [selectedTo, setSelectedTo] = useState(initialValueTo);
+
+  const handleChangeFrom = (event: any) => {
+    const { value } = event.target;
+
+    onChange({
+      [`${query}From`]: value,
+      ...(value > selectedTo ? { [`${query}To`]: value } : undefined),
+    });
+    setSelectedFrom(value);
+    if (value > selectedTo) setSelectedTo(value);
+  };
+
+  const handleChangeTo = (event: any) => {
+    const { value } = event.target;
+
+    onChange({
+      [`${query}To`]: value,
+      ...(value < selectedFrom ? { [`${query}From`]: value } : undefined),
+    });
+    setSelectedTo(value);
+    if (value < selectedFrom) setSelectedFrom(value);
+  };
+
   return (
     <div className="flex flex-col gap-3 text-2xl">
       <label htmlFor={title} className="ml-2 font-bold max-sm:ml-1">
@@ -24,12 +56,16 @@ const Range: React.FC<Props> = ({ title, fromOptions, toOptions }) => {
             От
           </label>
           <select
-            className="border-gr h-13 w-full rounded-sm border border-gray-light pl-3"
+            value={selectedFrom}
             name={title}
             id={title}
+            onChange={handleChangeFrom}
+            className="border-gr h-13 w-full rounded-sm border border-gray-light pl-3"
           >
-            {fromOptions.map(({ value, label }) => (
-              <option value={value}>{label}</option>
+            {options.map(({ value, label }) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
             ))}
           </select>
         </div>
@@ -38,12 +74,16 @@ const Range: React.FC<Props> = ({ title, fromOptions, toOptions }) => {
             До
           </label>
           <select
-            className="border-gr h-13 w-full rounded-sm border border-gray-light pl-3"
+            value={selectedTo}
+            onChange={handleChangeTo}
             name={title}
             id={title}
+            className="border-gr h-13 w-full rounded-sm border border-gray-light pl-3"
           >
-            {toOptions.map(({ value, label }) => (
-              <option value={value}>{label}</option>
+            {options.map(({ value, label }) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
             ))}
           </select>
         </div>

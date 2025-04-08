@@ -1,7 +1,11 @@
 import { memo } from 'react';
-import { FiltersPanel } from '@/widgets/filters';
-import { SpecialistCard } from '@/entities/specialist';
+import { FiltersPanel } from '@/features/specialistFilter';
+import {
+  SpecialistCard,
+  useGetPsychologistsQuery,
+} from '@/entities/specialist';
 import Button from '@/shared/ui/Button';
+import { useGetSubjectsQuery } from '@/entities/subjects';
 
 const CARD_MOCK = [
   { name: 'Катерина', age: '45', isVip: true, theme: 'тема', themeCount: 4 },
@@ -14,7 +18,29 @@ const CARD_MOCK = [
   { name: 'Катерина', age: '45', isVip: true, theme: 'тема', themeCount: 4 },
 ];
 
-export const Search = memo(() => {
+export const SpecialistsPage = memo(() => {
+  // const { data, isLoading, fetchNextPage } = useGetPsychologistsQuery();
+  // const { data, isLoading, fetchNextPage } = useGetPsychologistsQuery({
+  //   level: 0,
+  //   sex: 1,
+  //   subjectId: 1,
+  //   profSpeciality: 3,
+  //   isCertified: true,
+  //   ratingFrom: 0,
+  //   ratingTo: 0,
+  //   ageFrom: 18,
+  //   ageTo: 99,
+  //   filterType: 0,
+  //   limit: 12,
+  //   offset: 0,
+  // });
+  // console.log('data: ', data);
+  // console.log('isLoading: ', isLoading);
+
+  const { data, isLoading } = useGetSubjectsQuery();
+  // console.log('data: ', data);
+  // console.log('isLoading: ', isLoading);
+
   return (
     <div className="flex grow flex-col">
       <FiltersPanel />

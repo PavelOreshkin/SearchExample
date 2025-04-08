@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 type Props = {
-  children: any;
+  children: React.ReactNode;
   className?: string;
 };
 

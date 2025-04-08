@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 type Props = {
-  children: any;
+  children: React.ReactNode;
 };
 
 export const RootLayout: React.FC<Props> = memo(({ children }) => {
