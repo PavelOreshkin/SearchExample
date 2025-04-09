@@ -251,7 +251,6 @@ export const psychologistApi = createApi({
         return JSON.stringify(rest);
       },
       merge: (currentCache, newItems) => {
-        W;
         currentCache.specialists.push(...newItems.specialists);
       },
       forceRefetch({ currentArg, previousArg }) {

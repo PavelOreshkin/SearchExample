@@ -4,10 +4,9 @@ export type RawSubject = {
   sequence: number;
 };
 
-// export type SubjectsRawResponse = {
-//   items: RawSpecialist[];
-//   totalCount: number;
-// };
+export type SubjectsRawResponse = {
+  data: RawSubject[];
+};
 
 export type ParsedSubject = {
   id: number;

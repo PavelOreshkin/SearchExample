@@ -9,7 +9,7 @@ export type RawSpecialist = {
   level: 0 | 1; // Уровень 0 - базовый 1 - премиум
   rating: number;
   hasVideo: boolean;
-  subjectId: string;
+  subjectId: number;
   subjectsCount: number;
   isFavorite: boolean;
   onlineStatus: 1 | 2; // 1 - Оффлайн 2 - Онлайн

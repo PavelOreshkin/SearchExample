@@ -1,4 +1,4 @@
-import { memo, useMemo, useState } from 'react';
+import { memo } from 'react';
 import { FiltersPanel, useQueryFilters } from '@/features/specialistFilter';
 import {
   SpecialistCard,
@@ -13,16 +13,12 @@ const PAGE_SIZE = 12;
 
 export const SpecialistsPage = memo(() => {
   const { data: subjects } = useGetSubjectsQuery();
-  // console.log('subjects: ', subjects);
+  console.log('subjects: ', subjects);
   const { queryFilters, setQueryFilter } = useQueryFilters();
-  // console.log('SpecialistsPage queryFilters: ', queryFilters);
   const { data, isFetching } = useGetPsychologistsQuery(queryFilters, {
     skip: Object.keys(queryFilters).length === 0,
   });
   const { specialists, totalCount } = data || {};
-  // console.log('data: ', data);
-  // console.log('error: ', error);
-  // console.log('isLoading: ', isLoading);
 
   const handleFetchNextPage = () => {
     const prevOffset = Number(queryFilters.offset) || 0;
@@ -61,9 +57,8 @@ export const SpecialistsPage = memo(() => {
               sex={specialist.sex}
               isOnline={specialist.isOnline}
               defaultSubjectName={
-                subjects?.data?.find(
-                  (subject) => subject.id === specialist.subjectId,
-                )?.name || ''
+                subjects?.find((subject) => subject.id === specialist.subjectId)
+                  ?.name || ''
               }
               subjectsCount={specialist.subjectsCount}
               wasTimeAgo={specialist.wasTimeAgo}
