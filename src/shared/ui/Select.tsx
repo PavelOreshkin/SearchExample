@@ -25,7 +25,6 @@ const Select: React.FC<SelectProps> = ({
   isRangeCalculation,
   isSpecialTitleSize,
 }) => {
-  // const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(initialValue);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -55,9 +54,7 @@ const Select: React.FC<SelectProps> = ({
           name={title}
           id={title}
           onChange={handleChange}
-          // onMouseDown={() => setIsOpen(true)}
-          // onBlur={() => setIsOpen(false)}
-          className="border-gr relative h-13 w-full cursor-pointer appearance-none pl-3 text-2xl max-sm:h-10 max-sm:pl-1 max-sm:text-base"
+          className="border-gr relative h-13 w-full cursor-pointer appearance-none overflow-hidden text-ellipsis whitespace-nowrap pl-3 pr-5 text-2xl max-sm:h-10 max-sm:pl-1 max-sm:text-base"
         >
           <option value="">{placeholder}</option>
           {options.map(({ value, label }) => (
@@ -70,7 +67,6 @@ const Select: React.FC<SelectProps> = ({
           src={dropdownIcon}
           alt="dropdown arrow"
           className="pointer-events-none absolute right-3 top-[50%] h-4 w-4 translate-y-[-50%] max-sm:right-2 max-sm:h-3 max-sm:w-3"
-          // isOpen ? 'rotate-180' : ''
         />
       </div>
     </div>

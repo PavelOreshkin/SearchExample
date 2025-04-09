@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 
 export type QueryFilterType = Record<string, string | undefined>;
 
-export const useQueryFilters = (initialFilters: QueryFilterType) => {
+export const useQueryFilters = (initialFilters?: QueryFilterType) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const getQueryFilters = (): QueryFilterType => {
@@ -29,6 +29,7 @@ export const useQueryFilters = (initialFilters: QueryFilterType) => {
   };
 
   useEffect(() => {
+    if (!initialFilters) return;
     const queryFilters = getQueryFilters();
     const filterQueue: QueryFilterType = {};
     Object.entries(initialFilters).forEach(([key, value]) => {

@@ -27,6 +27,8 @@ const ageRange = Array.from({ length: 99 - 18 + 1 }, (_, i) => ({
 const INITIAL_FILTER_VALUES = {
   ageFrom: '18',
   ageTo: '99',
+  limit: '12',
+  offset: '0',
 };
 
 export const FiltersPanel = memo(() => {
@@ -86,14 +88,9 @@ export const FiltersPanel = memo(() => {
         initialValue: queryFilters.rating,
         options: [
           { label: 'новые', value: '0-0' },
-          { label: 'от 100 до 90', value: '90-100' },
-          { label: 'от 89 до 80', value: '89-80' },
-          { label: 'от 79 до 70', value: '79-70' },
-          { label: 'от 69 до 60', value: '69-60' },
-          { label: 'от 59 до 50', value: '59-50' },
-          { label: 'от 49 до 40', value: '49-40' },
-          { label: 'от 39 до 30', value: '39-30' },
-          { label: 'от 29 до 20', value: '29-20' },
+          { label: 'от 100 до 80', value: '80-100' },
+          { label: 'от 79 до 60', value: '60-79' },
+          { label: 'от 59 до 40', value: '40-79' },
         ],
       },
     ],
