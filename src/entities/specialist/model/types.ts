@@ -40,3 +40,15 @@ export type ParsedSpecialistResponse = {
   specialists: ParsedSpecialist[];
   totalCount: SpecialistListRawResponse['totalCount'];
 };
+
+export type SpecialistFilters = {
+  ageFrom: string;
+  ageTo: string;
+  limit: string;
+  offset: string;
+  sex?: string;
+  profSpeciality?: string;
+  ratingFrom?: string;
+  ratingTo?: string;
+  subjectId?: string;
+};

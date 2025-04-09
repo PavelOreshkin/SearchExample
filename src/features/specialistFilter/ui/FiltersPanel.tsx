@@ -7,7 +7,7 @@ import Range from '@/shared/ui/Range';
 import { useAppSelector } from '@/shared/lib/hooks.ts';
 import { selectSubjectOptions } from '@/entities/subjects';
 import { useQueryFilters } from '../lib/useQueryFilters';
-import type { QueryFilterType } from '../lib/useQueryFilters';
+import type { SpecialistFilters } from '@/entities/specialist/model/types';
 
 type SelectFilter = Omit<SelectProps, 'onChange'> & {
   type: 'Select';
@@ -24,7 +24,7 @@ const ageRange = Array.from({ length: 99 - 18 + 1 }, (_, i) => ({
   value: i + 18,
 }));
 
-const INITIAL_FILTER_VALUES = {
+export const INITIAL_FILTER_VALUES = {
   ageFrom: '18',
   ageTo: '99',
   limit: '12',
@@ -32,7 +32,7 @@ const INITIAL_FILTER_VALUES = {
 };
 
 export const FiltersPanel = memo(() => {
-  const [filter, setFilter] = useState<QueryFilterType>();
+  const [filter, setFilter] = useState<SpecialistFilters>();
   const subjectOptions = useAppSelector(selectSubjectOptions);
   const { queryFilters, setQueryFilter } = useQueryFilters(
     INITIAL_FILTER_VALUES,
@@ -86,7 +86,7 @@ export const FiltersPanel = memo(() => {
         title: 'Рейтинг',
         placeholder: 'Не важен',
         query: 'rating',
-        initialValue: queryFilters.rating,
+        initialValue: `${queryFilters.ratingFrom}-${queryFilters.ratingTo}`,
         options: [
           { label: 'новые', value: '0-0' },
           { label: 'от 100 до 80', value: '80-100' },
@@ -98,13 +98,17 @@ export const FiltersPanel = memo(() => {
     [subjectOptions],
   );
 
-  const handleChangeFilter = (filters: QueryFilterType) => {
-    setFilter(filters);
+  const handleChangeFilter = (filters: Record<string, string | undefined>) => {
+    setFilter((prev) => ({ ...prev, ...(filters as SpecialistFilters) }));
   };
 
   const handleApplyFilter = () => {
     if (!filter) return;
-    setQueryFilter(filter);
+    setQueryFilter({
+      ...filter,
+      limit: INITIAL_FILTER_VALUES.limit,
+      offset: INITIAL_FILTER_VALUES.offset,
+    });
   };
 
   return (

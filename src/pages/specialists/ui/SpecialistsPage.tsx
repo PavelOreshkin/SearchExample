@@ -8,12 +8,12 @@ import Button from '@/shared/ui/Button';
 import { useGetSubjectsQuery } from '@/entities/subjects';
 import emptySearchIcon from '../assets/empty_search_icon.svg';
 import { Loading } from '@/shared/ui/Loading';
+import { INITIAL_FILTER_VALUES } from '@/features/specialistFilter/ui/FiltersPanel';
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = Number(INITIAL_FILTER_VALUES.limit);
 
 export const SpecialistsPage = memo(() => {
   const { data: subjects } = useGetSubjectsQuery();
-  console.log('subjects: ', subjects);
   const { queryFilters, setQueryFilter } = useQueryFilters();
   const { data, isFetching } = useGetPsychologistsQuery(queryFilters, {
     skip: Object.keys(queryFilters).length === 0,

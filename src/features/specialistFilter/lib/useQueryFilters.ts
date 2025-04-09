@@ -1,20 +1,19 @@
+import type { SpecialistFilters } from '@/entities/specialist/model/types';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-export type QueryFilterType = Record<string, string | undefined>;
-
-export const useQueryFilters = (initialFilters?: QueryFilterType) => {
+export const useQueryFilters = (initialFilters?: SpecialistFilters) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const getQueryFilters = (): QueryFilterType => {
-    const result: QueryFilterType = {};
+  const getQueryFilters = (): SpecialistFilters => {
+    const result = {} as SpecialistFilters;
     searchParams.forEach((value, key) => {
-      result[key] = value;
+      result[key as keyof SpecialistFilters] = value;
     });
     return result;
   };
 
-  const setQueryFilter = (newFilters: QueryFilterType) => {
+  const setQueryFilter = (newFilters: Partial<SpecialistFilters>) => {
     const params = new URLSearchParams(searchParams);
 
     Object.entries(newFilters).forEach(([key, value]) => {
@@ -31,10 +30,10 @@ export const useQueryFilters = (initialFilters?: QueryFilterType) => {
   useEffect(() => {
     if (!initialFilters) return;
     const queryFilters = getQueryFilters();
-    const filterQueue: QueryFilterType = {};
+    const filterQueue = {} as SpecialistFilters;
     Object.entries(initialFilters).forEach(([key, value]) => {
       if (!(key in queryFilters)) {
-        filterQueue[key] = value;
+        filterQueue[key as keyof SpecialistFilters] = value;
       }
     });
     setQueryFilter(filterQueue);

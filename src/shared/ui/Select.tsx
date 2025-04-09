@@ -10,6 +10,8 @@ export type SelectProps = {
   query: string;
   onChange: (arg: Record<string, string | undefined>) => void;
   initialValue?: SelectProps['options'][0]['value'];
+  initialValueFrom?: SelectProps['options'][0]['value'];
+  initialValueTo?: SelectProps['options'][0]['value'];
   placeholder?: string;
   isRangeCalculation?: boolean;
   isSpecialTitleSize?: boolean;

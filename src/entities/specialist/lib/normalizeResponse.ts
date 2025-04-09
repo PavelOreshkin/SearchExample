@@ -9,7 +9,6 @@ import type {
 export const normalizeSpecialists = (response: {
   data: SpecialistListRawResponse;
 }): ParsedSpecialistResponse => {
-  console.log('response: ', response);
   const { items, totalCount } = response.data || {};
 
   const parsedSpecialists: ParsedSpecialist[] = items?.map((item) => {
