@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useState } from 'react';
 import type { SelectProps } from '@/shared/ui/Select';
 import Select from '@/shared/ui/Select';
 import Button from '@/shared/ui/Button';
@@ -32,6 +32,7 @@ const INITIAL_FILTER_VALUES = {
 };
 
 export const FiltersPanel = memo(() => {
+  const [filter, setFilter] = useState<QueryFilterType>();
   const subjectOptions = useAppSelector(selectSubjectOptions);
   const { queryFilters, setQueryFilter } = useQueryFilters(
     INITIAL_FILTER_VALUES,
@@ -98,7 +99,12 @@ export const FiltersPanel = memo(() => {
   );
 
   const handleChangeFilter = (filters: QueryFilterType) => {
-    setQueryFilter(filters);
+    setFilter(filters);
+  };
+
+  const handleApplyFilter = () => {
+    if (!filter) return;
+    setQueryFilter(filter);
   };
 
   return (
@@ -114,7 +120,7 @@ export const FiltersPanel = memo(() => {
         </div>
       ))}
       <div className="flex items-end">
-        <Button onClick={() => {}}>Показать анкеты</Button>
+        <Button onClick={handleApplyFilter}>Показать анкеты</Button>
       </div>
     </div>
   );

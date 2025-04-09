@@ -1,3 +1,4 @@
+// TODO ТИПЯЗИРОВАЦ
 interface Filters {
   sex: 1 | 2;
   ageFrom: number;

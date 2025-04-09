@@ -12,12 +12,10 @@ import { Loading } from '@/shared/ui/Loading';
 const PAGE_SIZE = 12;
 
 export const SpecialistsPage = memo(() => {
-  // const [offset, setOffset] = useState(0);
-
   const { data: subjects } = useGetSubjectsQuery();
   // console.log('subjects: ', subjects);
   const { queryFilters, setQueryFilter } = useQueryFilters();
-  console.log('SpecialistsPage queryFilters: ', queryFilters);
+  // console.log('SpecialistsPage queryFilters: ', queryFilters);
   const { data, isFetching } = useGetPsychologistsQuery(queryFilters, {
     skip: Object.keys(queryFilters).length === 0,
   });
@@ -31,7 +29,6 @@ export const SpecialistsPage = memo(() => {
     setQueryFilter({ offset: String(prevOffset + PAGE_SIZE) });
   };
 
-  // const isShowFetchMoreButton = (Number(queryFilters.limit) || 0) + (queryFilters.offset || 0) < totalCount
   const isShowFetchMoreButton =
     queryFilters.limit &&
     queryFilters.offset &&
