@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import Select from '@/shared/ui/Select';
 import Button from '@/shared/ui/Button';
 import Range from '@/shared/ui/Range';
