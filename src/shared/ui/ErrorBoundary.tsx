@@ -1,5 +1,5 @@
 import type React from 'react';
-import { Component } from 'react';
+import { PureComponent } from 'react';
 
 type Props = {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ type State = {
   hasError: boolean;
 };
 
-export class ErrorBoundary extends Component<Props> {
+export class ErrorBoundary extends PureComponent<Props> {
   state: State;
   constructor(props: Props) {
     super(props);
@@ -23,7 +23,7 @@ export class ErrorBoundary extends Component<Props> {
 
   componentDidCatch(error: unknown, errorInfo: unknown) {
     console.error('ErrorBoundary caught an error', error, errorInfo);
-    // тут нужно подключить Sentry
+    // тут можно подключить Sentry
   }
 
   render() {

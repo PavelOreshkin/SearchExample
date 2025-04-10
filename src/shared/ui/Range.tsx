@@ -21,6 +21,7 @@ const Range: React.FC<RangeProps> = ({
   initialValueTo = '',
   onChange,
 }) => {
+  console.log('Range');
   const [selectedFrom, setSelectedFrom] = useState(initialValueFrom);
   const [selectedTo, setSelectedTo] = useState(initialValueTo);
 

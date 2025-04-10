@@ -32,6 +32,7 @@ export const SpecialistCard: React.FC<SpecialistCardProps> = memo(
     wasTimeAgo,
     photoUrl,
   }) => {
+    console.log('SpecialistCard');
     const openCard = () => {
       console.log('открыть карточку c id: ', userId);
     };

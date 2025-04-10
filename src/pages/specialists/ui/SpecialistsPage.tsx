@@ -7,13 +7,14 @@ import Loading from '@/shared/ui/Loading';
 import { INITIAL_FILTER_VALUES } from '@/features/specialistFilter/ui/FiltersPanel';
 import Divider from '@/shared/ui/Divider';
 import EmptyPagePlaceholder from '@/shared/ui/EmptyPagePlaceholder';
-import { ErrorBoundary } from '@/shared/ui/Error';
+import { ErrorBoundary } from '@/shared/ui/ErrorBoundary';
 import { SpecialistErrorUI } from './SpecialistErrorUI';
 import { FilterErrorUI } from './FilterErrorUI';
 
 const PAGE_SIZE = Number(INITIAL_FILTER_VALUES.limit);
 
 const SpecialistsPage = memo(() => {
+  console.log('1 SpecialistsPage');
   const { queryFilters, setQueryFilter } = useQueryFilters();
   const {
     data,

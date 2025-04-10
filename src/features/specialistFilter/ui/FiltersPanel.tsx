@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import Select from '@/shared/ui/Select';
 import Button from '@/shared/ui/Button';
 import Range from '@/shared/ui/Range';
@@ -7,10 +7,28 @@ import { selectSubjectOptions } from '@/entities/subjects';
 import type { SpecialistFilters } from '@/entities/specialist/model/types';
 import { useQueryFilters } from '../lib/useQueryFilters';
 
-const ageRange = Array.from({ length: 99 - 18 + 1 }, (_, i) => ({
+const AGE_OPTIONS = Array.from({ length: 99 - 18 + 1 }, (_, i) => ({
   label: String(i + 18),
   value: i + 18,
 }));
+
+const SEX_OPTIONS = [
+  { label: 'мужчина', value: 1 },
+  { label: 'женщина', value: 2 },
+];
+
+const PROF_SPECIALITY_OPTIONS = [
+  { label: 'Консультант', value: 1 },
+  { label: 'Сексолог', value: 2 },
+  { label: 'Коуч', value: 3 },
+];
+
+const RATING_OPTIONS = [
+  { label: 'новые', value: '0-0' },
+  { label: 'от 100 до 80', value: '80-100' },
+  { label: 'от 79 до 60', value: '60-79' },
+  { label: 'от 59 до 40', value: '40-79' },
+];
 
 export const INITIAL_FILTER_VALUES = {
   ageFrom: '18',
@@ -21,7 +39,6 @@ export const INITIAL_FILTER_VALUES = {
 
 export const FiltersPanel = memo(() => {
   const [filter, setFilter] = useState<SpecialistFilters>();
-  const subjectOptions = useAppSelector(selectSubjectOptions);
   const { queryFilters, setQueryFilter } = useQueryFilters(
     INITIAL_FILTER_VALUES,
   );
@@ -33,14 +50,26 @@ export const FiltersPanel = memo(() => {
     [],
   );
 
-  const handleApplyFilter = () => {
+  const handleApplyFilter = useCallback(() => {
     if (!filter) return;
     setQueryFilter({
       ...filter,
       limit: INITIAL_FILTER_VALUES.limit,
       offset: INITIAL_FILTER_VALUES.offset,
     });
-  };
+  }, [
+    filter?.ageFrom,
+    filter?.ageTo,
+    filter?.limit,
+    filter?.offset,
+    filter?.profSpeciality,
+    filter?.ratingFrom,
+    filter?.ratingTo,
+    filter?.sex,
+    filter?.subjectId,
+  ]);
+
+  const subjectOptions = useAppSelector(selectSubjectOptions);
 
   return (
     <section className="grid grid-cols-1 gap-x-20 gap-y-9 rounded-sm max-sm:gap-y-5 max-sm:border max-sm:border-gray-light max-sm:p-2 md:grid-cols-2 lg:grid-cols-3">
@@ -49,10 +78,7 @@ export const FiltersPanel = memo(() => {
         placeholder="Любого пола"
         query="sex"
         initialValue={queryFilters.sex}
-        options={[
-          { label: 'мужчина', value: 1 },
-          { label: 'женщина', value: 2 },
-        ]}
+        options={SEX_OPTIONS}
         isSpecialTitleSize
         onChange={handleChangeFilter}
       />
@@ -61,7 +87,7 @@ export const FiltersPanel = memo(() => {
         query="age"
         initialValueFrom={queryFilters.ageFrom || INITIAL_FILTER_VALUES.ageFrom}
         initialValueTo={queryFilters.ageTo || INITIAL_FILTER_VALUES.ageTo}
-        options={ageRange}
+        options={AGE_OPTIONS}
         onChange={handleChangeFilter}
       />
       <Select
@@ -77,11 +103,7 @@ export const FiltersPanel = memo(() => {
         placeholder="Все варианты"
         query="profSpeciality"
         initialValue={queryFilters.profSpeciality}
-        options={[
-          { label: 'Консультант', value: 1 },
-          { label: 'Сексолог', value: 2 },
-          { label: 'Коуч', value: 3 },
-        ]}
+        options={PROF_SPECIALITY_OPTIONS}
         onChange={handleChangeFilter}
       />
       <Select
@@ -89,12 +111,7 @@ export const FiltersPanel = memo(() => {
         placeholder="Не важен"
         query="rating"
         initialValue={`${queryFilters.ratingFrom}-${queryFilters.ratingTo}`}
-        options={[
-          { label: 'новые', value: '0-0' },
-          { label: 'от 100 до 80', value: '80-100' },
-          { label: 'от 79 до 60', value: '60-79' },
-          { label: 'от 59 до 40', value: '40-79' },
-        ]}
+        options={RATING_OPTIONS}
         onChange={handleChangeFilter}
         isRangeCalculation
       />
