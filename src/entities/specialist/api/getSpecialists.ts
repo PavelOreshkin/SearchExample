@@ -6,6 +6,19 @@ import type {
 } from '../model/types';
 import { normalizeSpecialists } from '../lib/normalizeResponse';
 
+// Чтобы симулировать ошибку нужно разкоментировать этот блок:
+// const errorMockBaseQuery = async () => {
+//   return {
+//     error: {
+//       status: 500,
+//       data: { message: 'Ошибка запроса получения специалистов' },
+//     },
+//   };
+// };
+
+// и добавить эту строчку в функцию ниже
+// baseQuery: errorMockBaseQuery,
+
 export const specialistApi = createApi({
   reducerPath: 'specialistApi',
   baseQuery: fetchBaseQuery({ baseUrl: API_BASE }),
