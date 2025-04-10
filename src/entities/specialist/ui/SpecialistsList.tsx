@@ -9,7 +9,7 @@ type SpecialistsListProps = {
 
 export const SpecialistsList: React.FC<SpecialistsListProps> = memo(
   ({ specialists }) => {
-    const { data: subjects, isError } = useGetSubjectsQuery();
+    const { data: subjects } = useGetSubjectsQuery();
 
     const findDefaultSubjectName = useCallback(
       (subjectId: ParsedSpecialist['subjectId']) =>
@@ -22,6 +22,7 @@ export const SpecialistsList: React.FC<SpecialistsListProps> = memo(
         {specialists?.map((specialist) => (
           <SpecialistCard
             key={specialist.userId}
+            userId={specialist.userId}
             name={specialist.name}
             age={specialist.age}
             sex={specialist.sex}
