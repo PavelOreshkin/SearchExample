@@ -1,2 +1,2 @@
-export { SpecialistCard } from './ui/SpecialistCard';
-export { useGetPsychologistsQuery, psychologistApi } from './api/specialists';
+export { SpecialistsList } from './ui/SpecialistsList';
+export { useGetSpecialistsQuery, specialistApi } from './api/getSpecialists';

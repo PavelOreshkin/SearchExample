@@ -1,21 +1,18 @@
 import { memo } from 'react';
 import { FiltersPanel, useQueryFilters } from '@/features/specialistFilter';
-import {
-  SpecialistCard,
-  useGetPsychologistsQuery,
-} from '@/entities/specialist';
+import { SpecialistsList, useGetSpecialistsQuery } from '@/entities/specialist';
 import Button from '@/shared/ui/Button';
-import { useGetSubjectsQuery } from '@/entities/subjects';
 import emptySearchIcon from '../assets/empty_search_icon.svg';
-import { Loading } from '@/shared/ui/Loading';
+import Loading from '@/shared/ui/Loading';
 import { INITIAL_FILTER_VALUES } from '@/features/specialistFilter/ui/FiltersPanel';
+import Divider from '@/shared/ui/Divider';
+import EmptyPagePlaceholder from '@/shared/ui/EmptyPagePlaceholder';
 
 const PAGE_SIZE = Number(INITIAL_FILTER_VALUES.limit);
 
 export const SpecialistsPage = memo(() => {
-  const { data: subjects } = useGetSubjectsQuery();
   const { queryFilters, setQueryFilter } = useQueryFilters();
-  const { data, isFetching } = useGetPsychologistsQuery(queryFilters, {
+  const { data, isFetching } = useGetSpecialistsQuery(queryFilters, {
     skip: Object.keys(queryFilters).length === 0,
   });
   const { specialists, totalCount } = data || {};
@@ -26,6 +23,7 @@ export const SpecialistsPage = memo(() => {
   };
 
   const isShowFetchMoreButton =
+    specialists?.length &&
     queryFilters.limit &&
     queryFilters.offset &&
     totalCount &&
@@ -34,39 +32,17 @@ export const SpecialistsPage = memo(() => {
   return (
     <div className="flex grow flex-col">
       <FiltersPanel />
-      <div className="my-6 w-full border-b border-b-gray-light max-sm:hidden" />
+      <Divider />
       <div className="grow">
-        {specialists?.length === 0 && (
-          <div className="flex h-full flex-col items-center justify-center">
-            <img
-              src={emptySearchIcon}
-              alt="empty page icon"
-              className="h-[160px] w-[160px] max-sm:h-[100px] max-sm:w-[100px]"
-            />
-            <p className="max-w-[264px] text-center text-2xl leading-[160%] max-sm:max-w-[180px] max-sm:text-base max-sm:leading-[160%]">
-              К сожалению, нет анкет с такими параметрами
-            </p>
-          </div>
+        {specialists?.length ? (
+          <SpecialistsList specialists={specialists} />
+        ) : null}
+        {!specialists?.length && !isFetching && (
+          <EmptyPagePlaceholder
+            iconSrc={emptySearchIcon}
+            text="К сожалению, нет анкет с такими параметрами"
+          />
         )}
-        <div className="grid grid-cols-2 gap-x-5 gap-y-10 max-sm:mt-2 max-sm:gap-x-2 max-sm:gap-y-4 lg:grid-cols-3">
-          {specialists?.map((specialist) => (
-            <SpecialistCard
-              key={specialist.userId}
-              name={specialist.name}
-              age={specialist.age}
-              sex={specialist.sex}
-              isOnline={specialist.isOnline}
-              defaultSubjectName={
-                subjects?.find((subject) => subject.id === specialist.subjectId)
-                  ?.name || ''
-              }
-              subjectsCount={specialist.subjectsCount}
-              wasTimeAgo={specialist.wasTimeAgo}
-              rating={specialist.rating}
-              photoUrl={specialist.photoUrl}
-            />
-          ))}
-        </div>
       </div>
       {isFetching ? (
         <div className="mt-7 flex justify-center">

@@ -64,7 +64,7 @@ module.exports = {
     'arrow-body-style': 'off',
     'prefer-arrow-callback': 'off',
     'prettier/prettier': 'warn',
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': 'off',
     'react/no-unstable-nested-components': ['warn', { allowAsProps: true }],
     // 导入类型时需添加 type 修饰符
     '@typescript-eslint/consistent-type-imports': [

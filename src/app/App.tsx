@@ -1,15 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 import { SpecialistsPage } from '@/pages/specialists';
-import { RootLayout } from '@/shared/ui/RootLayout';
+import { Providers } from './providers';
 
-function App() {
-  return (
-    <RootLayout>
-      <Routes>
-        <Route path="/" element={<SpecialistsPage />} />
-      </Routes>
-    </RootLayout>
-  );
-}
-
-export default App;
+export const App = () => (
+  <Providers>
+    <Routes>
+      <Route path="/" element={<SpecialistsPage />} />
+    </Routes>
+  </Providers>
+);

@@ -6,14 +6,11 @@ import type {
 } from '../model/types';
 import { normalizeSpecialists } from '../lib/normalizeResponse';
 
-export const psychologistApi = createApi({
-  reducerPath: 'psychologistApi',
+export const specialistApi = createApi({
+  reducerPath: 'specialistApi',
   baseQuery: fetchBaseQuery({ baseUrl: API_BASE }),
   endpoints: (builder) => ({
-    getPsychologists: builder.query<
-      ParsedSpecialistResponse,
-      SpecialistFilters
-    >({
+    getSpecialists: builder.query<ParsedSpecialistResponse, SpecialistFilters>({
       query: (filters) => ({
         url: 'search/specialists',
         params: filters,
@@ -33,4 +30,4 @@ export const psychologistApi = createApi({
   }),
 });
 
-export const { useGetPsychologistsQuery } = psychologistApi;
+export const { useGetSpecialistsQuery } = specialistApi;

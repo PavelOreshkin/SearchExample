@@ -1,4 +1,6 @@
-export const Loading = () => (
+import { memo } from 'react';
+
+const Loading = () => (
   <div role="status">
     <svg
       aria-hidden="true"
@@ -16,6 +18,7 @@ export const Loading = () => (
         fill="currentFill"
       />
     </svg>
-    <span className="sr-only">Loading...</span>
   </div>
 );
+
+export default memo(Loading);
