@@ -14,7 +14,6 @@ import { FilterErrorUI } from './FilterErrorUI';
 const PAGE_SIZE = Number(INITIAL_FILTER_VALUES.limit);
 
 const SpecialistsPage = memo(() => {
-  console.log('1 SpecialistsPage');
   const { queryFilters, setQueryFilter } = useQueryFilters();
   const {
     data,

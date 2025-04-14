@@ -9,7 +9,6 @@ type SpecialistsListProps = {
 
 export const SpecialistsList: React.FC<SpecialistsListProps> = memo(
   ({ specialists }) => {
-    console.log('2 SpecialistsList');
     const { data: subjects } = useGetSubjectsQuery();
 
     const findDefaultSubjectName = useCallback(
