@@ -22,6 +22,7 @@ import { normalizeSpecialists } from '../lib/normalizeResponse';
 export const specialistApi = createApi({
   reducerPath: 'specialistApi',
   baseQuery: fetchBaseQuery({ baseUrl: API_BASE }),
+
   endpoints: (builder) => ({
     getSpecialists: builder.query<ParsedSpecialistResponse, SpecialistFilters>({
       query: (filters) => ({

@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useRef } from 'react';
 import Select from '@/shared/ui/Select';
 import Button from '@/shared/ui/Button';
 import Range from '@/shared/ui/Range';
@@ -6,6 +6,7 @@ import { useAppSelector } from '@/shared/lib/hooks.ts';
 import { selectSubjectOptions } from '@/entities/subjects';
 import type { SpecialistFilters } from '@/entities/specialist/model/types';
 import { useQueryFilters } from '../lib/useQueryFilters';
+import { equal } from '@/shared/lib/equal';
 
 const AGE_OPTIONS = Array.from({ length: 99 - 18 + 1 }, (_, i) => ({
   label: String(i + 18),
@@ -38,36 +39,35 @@ export const INITIAL_FILTER_VALUES = {
 };
 
 export const FiltersPanel = memo(() => {
-  const [filter, setFilter] = useState<SpecialistFilters>();
+  const cachedFilterRef = useRef<SpecialistFilters>();
+  const filterRef = useRef<SpecialistFilters>();
   const { queryFilters, setQueryFilter } = useQueryFilters(
     INITIAL_FILTER_VALUES,
   );
 
   const handleChangeFilter = useCallback(
     (filters: Record<string, string | undefined>) => {
-      setFilter((prev) => ({ ...prev, ...(filters as SpecialistFilters) }));
+      filterRef.current = {
+        ...filterRef.current,
+        ...(filters as SpecialistFilters),
+      };
     },
     [],
   );
 
   const handleApplyFilter = useCallback(() => {
+    const filter = filterRef.current;
+    const cachedFilter = cachedFilterRef.current;
+
     if (!filter) return;
+    if (equal(filter, cachedFilter)) return;
+
+    cachedFilterRef.current = filterRef.current;
     setQueryFilter({
+      ...INITIAL_FILTER_VALUES,
       ...filter,
-      limit: INITIAL_FILTER_VALUES.limit,
-      offset: INITIAL_FILTER_VALUES.offset,
     });
-  }, [
-    filter?.ageFrom,
-    filter?.ageTo,
-    filter?.limit,
-    filter?.offset,
-    filter?.profSpeciality,
-    filter?.ratingFrom,
-    filter?.ratingTo,
-    filter?.sex,
-    filter?.subjectId,
-  ]);
+  }, [INITIAL_FILTER_VALUES]);
 
   const subjectOptions = useAppSelector(selectSubjectOptions);
 

@@ -2,19 +2,22 @@ import type { Middleware } from '@reduxjs/toolkit';
 import { isRejectedWithValue } from '@reduxjs/toolkit';
 import { toast } from 'react-hot-toast';
 
+type FetchError = {
+  status: number;
+  data: {
+    message?: string;
+    [key: string]: unknown;
+  };
+};
+
+const DEFAULT_FETCH_ERROR = 'Произошла ошибка при выполнении запроса';
+
 export const errorLogger: Middleware = () => (next) => (action) => {
   if (isRejectedWithValue(action)) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const error = action.payload as any;
+    const error = action.payload as FetchError;
 
-    console.log('error: ', error);
-
-    const message =
-      error?.data?.message ||
-      error?.error ||
-      'Произошла ошибка при выполнении запроса';
-
-    toast(message);
+    console.error('error: ', error);
+    toast(error.data.message || DEFAULT_FETCH_ERROR);
   }
 
   return next(action);
