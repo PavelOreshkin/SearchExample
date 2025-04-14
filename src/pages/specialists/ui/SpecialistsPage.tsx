@@ -13,7 +13,7 @@ import { FilterErrorUI } from './FilterErrorUI';
 
 const PAGE_SIZE = Number(INITIAL_FILTER_VALUES.limit);
 
-const SpecialistsPage = memo(() => {
+const SpecialistsPage = () => {
   const { queryFilters, setQueryFilter } = useQueryFilters();
   const {
     data,
@@ -73,6 +73,6 @@ const SpecialistsPage = memo(() => {
       )}
     </div>
   );
-});
+};
 
-export default SpecialistsPage;
+export default memo(SpecialistsPage);

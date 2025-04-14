@@ -38,7 +38,7 @@ export const INITIAL_FILTER_VALUES = {
   offset: '0',
 };
 
-export const FiltersPanel = memo(() => {
+const FiltersPanel = () => {
   const cachedFilterRef = useRef<SpecialistFilters>();
   const filterRef = useRef<SpecialistFilters>();
   const { queryFilters, setQueryFilter } = useQueryFilters(
@@ -120,4 +120,6 @@ export const FiltersPanel = memo(() => {
       </div>
     </section>
   );
-});
+};
+
+export default memo(FiltersPanel);

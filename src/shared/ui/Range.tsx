@@ -46,10 +46,13 @@ const Range: React.FC<RangeProps> = ({
     if (value < selectedFrom) setSelectedFrom(value);
   };
 
+  const selectFromId = `${title}_From`;
+  const selectToId = `${title}_To`;
+
   return (
     <div className="flex flex-col gap-3 text-2xl max-sm:flex-row max-sm:items-center max-sm:gap-0">
       <label
-        htmlFor={title}
+        htmlFor={selectFromId}
         className="ml-2 whitespace-nowrap font-bold max-sm:ml-1 max-sm:text-base"
       >
         {title}
@@ -57,7 +60,7 @@ const Range: React.FC<RangeProps> = ({
       <div className="flex grow justify-between">
         <div className="flex w-full flex-nowrap">
           <label
-            htmlFor={title}
+            htmlFor={selectFromId}
             className="mx-3 self-center max-sm:mr-1 max-sm:text-md"
           >
             От
@@ -66,9 +69,9 @@ const Range: React.FC<RangeProps> = ({
             <select
               value={selectedFrom}
               name={title}
-              id={title}
+              id={selectFromId}
               onChange={handleChangeFrom}
-              className="border-gr h-13 w-full max-w-[88px] cursor-pointer appearance-none pl-3 max-lg:max-w-[130px] max-md:max-w-[250px] max-sm:h-10 max-sm:pl-2 max-sm:text-base"
+              className="border-gr h-13 w-full cursor-pointer appearance-none pl-3 max-sm:h-10 max-sm:pl-2 max-sm:text-base"
             >
               {options.map(({ value, label }) => (
                 <option key={value} value={value}>
@@ -85,7 +88,7 @@ const Range: React.FC<RangeProps> = ({
         </div>
         <div className="flex w-full flex-nowrap justify-end">
           <label
-            htmlFor={title}
+            htmlFor={selectToId}
             className="mx-3 self-center max-sm:mr-1 max-sm:text-md"
           >
             До
@@ -95,8 +98,8 @@ const Range: React.FC<RangeProps> = ({
               value={selectedTo}
               onChange={handleChangeTo}
               name={title}
-              id={title}
-              className="border-gr h-13 w-full max-w-[88px] cursor-pointer appearance-none pl-3 max-lg:max-w-[130px] max-md:max-w-[250px] max-sm:h-10 max-sm:pl-2 max-sm:text-base"
+              id={selectToId}
+              className="h-13 w-full cursor-pointer appearance-none pl-3 max-sm:h-10 max-sm:pl-2 max-sm:text-base"
             >
               {options.map(({ value, label }) => (
                 <option key={value} value={value}>

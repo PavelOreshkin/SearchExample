@@ -6,7 +6,7 @@ import type { ParsedSpecialist } from '../model/types';
 
 type AvatarProps = Pick<ParsedSpecialist, 'sex' | 'photoUrl'>;
 
-export const Avatar: React.FC<AvatarProps> = memo(({ sex, photoUrl }) => {
+const Avatar: React.FC<AvatarProps> = ({ sex, photoUrl }) => {
   const avatar = useMemo(() => {
     if (photoUrl) return photoUrl;
     if (sex === 1) return noPhotoMan;
@@ -21,4 +21,6 @@ export const Avatar: React.FC<AvatarProps> = memo(({ sex, photoUrl }) => {
       className="aspect-square w-full max-w-full rounded-sm border border-gray-light"
     />
   );
-});
+};
+
+export default memo(Avatar);
