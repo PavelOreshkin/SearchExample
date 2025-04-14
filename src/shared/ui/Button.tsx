@@ -13,7 +13,7 @@ const Button: React.FC<ButtonProps> = ({ children, onClick, className }) => {
 
   return (
     <button
-      className={`text-2xl-bold h-13 w-full rounded-sm bg-pink font-bold text-white shadow-md shadow-gray-dark/70 ease-in-out hover:bg-pink/80 active:shadow-lg contrast-more:bg-white contrast-more:text-black max-sm:h-10 max-sm:text-base ${className}`}
+      className={`text-2xl-bold h-13 w-full rounded-sm bg-pink font-bold text-white shadow-md shadow-gray-dark/70 ease-in-out hover:bg-pink/80 active:shadow-lg contrast-more:bg-pinkContrast max-sm:h-10 max-sm:text-base ${className}`}
       onClick={onClick}
       onKeyDown={handleKeyDown}
     >

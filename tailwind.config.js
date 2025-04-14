@@ -29,6 +29,7 @@ export default {
         light: 'rgba(204, 204, 204, 1)',
       },
       pink: '#FF006B',
+      pinkContrast: '#C60056',
       green: '#37B86B',
     },
   },
@@ -39,9 +40,4 @@ export default {
       borderColor: ['contrast-more'],
     },
   },
-  // plugins: [
-  //   plugin(function ({ addVariant }) {
-  //     addVariant('contrast-more', '@media (prefers-contrast: more)');
-  //   }),
-  // ],
 };
