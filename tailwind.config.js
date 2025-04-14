@@ -32,5 +32,16 @@ export default {
       green: '#37B86B',
     },
   },
-  plugins: [],
+  variants: {
+    extend: {
+      backgroundColor: ['contrast-more'],
+      textColor: ['contrast-more'],
+      borderColor: ['contrast-more'],
+    },
+  },
+  // plugins: [
+  //   plugin(function ({ addVariant }) {
+  //     addVariant('contrast-more', '@media (prefers-contrast: more)');
+  //   }),
+  // ],
 };

@@ -56,7 +56,7 @@ const Select: React.FC<SelectProps> = ({
           name={title}
           id={title}
           onChange={handleChange}
-          className="border-gr relative h-13 w-full cursor-pointer appearance-none overflow-hidden text-ellipsis whitespace-nowrap pl-3 pr-5 text-2xl max-sm:h-10 max-sm:pl-1 max-sm:text-base"
+          className="border-gr relative h-13 w-full cursor-pointer appearance-none overflow-hidden text-ellipsis whitespace-nowrap rounded-sm pl-3 pr-5 text-2xl max-sm:h-10 max-sm:pl-1 max-sm:text-base"
         >
           <option value="">{placeholder}</option>
           {options.map(({ value, label }) => (

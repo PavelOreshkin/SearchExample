@@ -71,7 +71,7 @@ const Range: React.FC<RangeProps> = ({
               name={title}
               id={selectFromId}
               onChange={handleChangeFrom}
-              className="border-gr h-13 w-full cursor-pointer appearance-none pl-3 max-sm:h-10 max-sm:pl-2 max-sm:text-base"
+              className="border-gr h-13 w-full cursor-pointer appearance-none rounded-sm pl-3 max-sm:h-10 max-sm:pl-2 max-sm:text-base"
             >
               {options.map(({ value, label }) => (
                 <option key={value} value={value}>
@@ -99,7 +99,7 @@ const Range: React.FC<RangeProps> = ({
               onChange={handleChangeTo}
               name={title}
               id={selectToId}
-              className="h-13 w-full cursor-pointer appearance-none pl-3 max-sm:h-10 max-sm:pl-2 max-sm:text-base"
+              className="h-13 w-full cursor-pointer appearance-none rounded-sm pl-3 max-sm:h-10 max-sm:pl-2 max-sm:text-base"
             >
               {options.map(({ value, label }) => (
                 <option key={value} value={value}>

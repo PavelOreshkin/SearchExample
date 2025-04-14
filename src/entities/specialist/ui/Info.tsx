@@ -31,16 +31,16 @@ const Info: React.FC<InfoProps> = ({
         ) : null}
       </div>
       <div className="mt-2 flex overflow-hidden text-xl italic max-sm:mt-1 max-sm:text-md">
-        <p className="overflow-hidden text-ellipsis whitespace-nowrap text-gray-dark">
+        <p className="overflow-hidden text-ellipsis whitespace-nowrap text-gray-dark contrast-more:text-black">
           {defaultSubjectName}
         </p>
         {subjectsCount - 1 > 0 && (
-          <p className="ml-1 flex-shrink whitespace-nowrap text-gray-normal max-sm:hidden">
+          <p className="ml-1 flex-shrink whitespace-nowrap text-gray-normal contrast-more:text-black max-sm:hidden">
             и ещё {subjectsCount - 1} темы
           </p>
         )}
       </div>
-      <p className="mt-2 overflow-hidden text-ellipsis whitespace-nowrap text-xl text-gray-light max-sm:hidden">
+      <p className="mt-2 overflow-hidden text-ellipsis whitespace-nowrap text-xl text-gray-light contrast-more:text-black max-sm:hidden">
         Был{sex === 2 ? 'а ' : ' '}
         {wasTimeAgo}
       </p>
