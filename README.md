@@ -69,11 +69,11 @@
 ### Разработать небольшое SPA-приложение.
 
 Необходимо использовать TypeScript, React, Redux и/или RxJS (желательно). Всё остальное остается на усмотрение разработчика, следуя практикам разработки React-приложений.
-Необходимо разработать UI в соответствии с макетом Figma: https://www.figma.com/file/nZFIHJOJtLvjvwILzaMpc9/Untitled?type=design&node-id=1-1935&mode=design&t=NRTp3KT0EgkYLzxH-4
+Необходимо разработать UI в соответствии с макетом Figma: 
+https://www.figma.com/design/PHfAwHW92aUmY8a2qFwXXP/%D0%A2%D0%B5%D1%81%D1%82%D0%BE%D0%B2%D0%BE%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-Freuders.com?node-id=0-1&p=f&t=EZYnqAyvYhicSjHM-0
   1. UI должен быть реализован под современные версии наиболее популярных браузеров;
   2. Используйте mobile-first подход;
-  3. Если у специалиста отсутствует фото, то необходимо отображать аватар в зависимости от пола:
-https://www.figma.com/file/nZFIHJOJtLvjvwILzaMpc9/Untitled?type=design&node-id=1-7763&mode=design&t=IvJ3jJjlGuhW9V4o-4.
+  3. Если у специалиста отсутствует фото, то необходимо отображать аватар в зависимости от пола
 
 Значения фильтров поиска необходимо хранить в query params
 
